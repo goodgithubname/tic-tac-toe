@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Board from './components/Board/Board';
+import Score from './components/Score';
 import './App.css';
 
 function App() {
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
+
+  function onWin(player) {
+    if (player === 'X') {
+      setPlayer1Score(score => score + 1);
+    } else if (player === 'O') {
+      setPlayer2Score(score => score + 1);
+    }
+  }
+
+  console.log(player1Score, player2Score)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Board onWin={onWin} />
+      <Score xScore={player1Score} oScore={player2Score} />
     </div>
+
   );
 }
 
